@@ -54,5 +54,12 @@ dependencies {
     //Google maps
     implementation(libs.play.services.maps.v1701)
     implementation(libs.play.services.location)
+
+//Firebase
+    implementation(libs.play.services.auth)// Para autenticação com Google
+    implementation(libs.firebase.auth) // Para autenticação Firebase
+    implementation(libs.androidx.lifecycle.viewmodel.ktx) // Para ViewModel
+    implementation(libs.androidx.navigation.fragment.ktx)// Para navegação entre telas
+    implementation(libs.androidx.navigation.ui.ktx) // Para navegação entre telas
 }
 
