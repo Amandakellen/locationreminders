@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "363833233512",
+    "project_id": "location-reminders-ef11e",
+    "storage_bucket": "location-reminders-ef11e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363833233512:android:f6099c9362122b40486bdd",
+        "android_client_info": {
+          "package_name": "com.example.locationreminders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363833233512-k9k9ehd6cddirq86nph8r9p97famfrma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyEJsHJHUayl63yp9mt5793iLa0TeqnfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363833233512-k9k9ehd6cddirq86nph8r9p97famfrma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
