@@ -2,8 +2,10 @@ package com.example.locationreminders.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 
 class FirebaseAuthRepository {
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -31,5 +33,13 @@ class FirebaseAuthRepository {
             _user.value = firebaseAuth.currentUser
             onResult(task.isSuccessful)
         }
+    }
+
+    fun loginWithGoogle(account: GoogleSignInAccount, onResult: (Boolean) -> Unit) {
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener { task ->
+                onResult(task.isSuccessful)
+            }
     }
 }
