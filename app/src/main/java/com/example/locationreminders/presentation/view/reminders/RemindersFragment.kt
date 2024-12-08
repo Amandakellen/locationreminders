@@ -1,4 +1,4 @@
-package com.example.locationreminders.view.reminders
+package com.example.locationreminders.presentation.view.reminders
 
 
 import android.os.Bundle

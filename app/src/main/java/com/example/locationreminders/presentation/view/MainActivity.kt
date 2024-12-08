@@ -1,4 +1,4 @@
-package com.example.locationreminders.view
+package com.example.locationreminders.presentation.view
 
 import com.example.locationreminders.R
 
@@ -20,17 +20,12 @@ class MainActivity : FragmentActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializa o Firebase Auth
-        mAuth = FirebaseAuth.getInstance()
-
-        // Configuração do NavController para navegação
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        // Verifica se o usuário está logado, senão navega para o LoginFragment
-        if (mAuth.currentUser != null) {
-            navController.navigate(R.id.remindersFragment)
-        } else {
+        mAuth = FirebaseAuth.getInstance()
+        if (mAuth.currentUser == null) {
             navController.navigate(R.id.loginFragment)
         }
     }

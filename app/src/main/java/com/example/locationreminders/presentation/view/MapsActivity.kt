@@ -1,4 +1,4 @@
-package com.example.locationreminders.view
+package com.example.locationreminders.presentation.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
