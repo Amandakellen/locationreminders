@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
         }
 
         binding.signupTextView.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
     }
 
