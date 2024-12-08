@@ -1,7 +1,10 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id("com.google.gms.google-services")
+
 
 }
 
@@ -65,5 +68,10 @@ dependencies {
     //Navigation
     implementation(libs.androidx.navigation.fragment.ktx.v253)
     implementation(libs.androidx.navigation.ui.ktx.v253)
+
+    //Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.android.compat)
+
 }
 
