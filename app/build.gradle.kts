@@ -61,5 +61,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx) // Para ViewModel
     implementation(libs.androidx.navigation.fragment.ktx)// Para navegação entre telas
     implementation(libs.androidx.navigation.ui.ktx) // Para navegação entre telas
+
+    //Navigation
+    implementation(libs.androidx.navigation.fragment.ktx.v253)
+    implementation(libs.androidx.navigation.ui.ktx.v253)
 }
 

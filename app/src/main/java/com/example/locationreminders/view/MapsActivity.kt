@@ -1,7 +1,8 @@
-package com.example.locationreminders
+package com.example.locationreminders.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.locationreminders.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
