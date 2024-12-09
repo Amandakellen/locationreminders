@@ -26,7 +26,12 @@
         android:id="@+id/remindersFragment"
         android:name="com.example.locationreminders.presentation.view.reminders.RemindersFragment"
         android:label="fragment_reminders"
-        tools:layout="@layout/fragment_reminders" />
+        tools:layout="@layout/fragment_reminders">
+        <action
+            android:id="@+id/action_remindersFragment_to_addReminderFragment"
+            app:destination="@id/addReminderFragment" />
+
+    </fragment>
 
     <!-- Tela de Cadastro -->
     <fragment
@@ -38,6 +43,17 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+
+    <!-- Tela de Adicionar Lembrete -->
+    <fragment
+        android:id="@+id/addReminderFragment"
+        android:name="com.example.locationreminders.presentation.addreminders.AddReminderFragment"
+        android:label="fragment_add_reminder"
+        tools:layout="@layout/add_reminder_fragment">
+        <action
+            android:id="@+id/action_addReminderFragment_to_remindersFragment"
+            app:destination="@id/remindersFragment" />
     </fragment>
 
 </navigation>
