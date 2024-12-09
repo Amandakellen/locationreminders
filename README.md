@@ -1,6 +1,3 @@
-Aqui está um modelo de **README** profissional e detalhado para o projeto **Lembretes de Localização** do curso da Udacity.
-
----
 
 # 📍 **Lembretes de Localização**  
 
