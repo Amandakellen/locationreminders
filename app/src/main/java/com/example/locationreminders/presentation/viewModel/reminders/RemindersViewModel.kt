@@ -1,41 +1,40 @@
 package com.example.locationreminders.presentation.viewModel.reminders
 
 
+import android.app.Application
 import androidx.lifecycle.*
-import com.example.locationreminders.data.repository.RemindersRepository
+import com.example.locationreminders.data.local.ReminderDatabase
+import com.example.locationreminders.data.repository.RemindersLocalRepository
 import com.example.locationreminders.domain.model.Reminder
 import kotlinx.coroutines.launch
 
-class RemindersViewModel(private val repository: RemindersRepository) : ViewModel() {
+class RemindersViewModel(application: Application) : AndroidViewModel(application) {
 
-    // LiveData para a lista de lembretes
-    private val _remindersList = MutableLiveData<List<Reminder>>()
-    val remindersList: LiveData<List<Reminder>> = _remindersList
+    private val remindersRepository: RemindersLocalRepository
 
-    // LiveData para mensagens de erro
-    private val _errorMessage = MutableLiveData<String?>()
-    val errorMessage: LiveData<String?> = _errorMessage
+    private val _reminders = MutableLiveData<List<Reminder>>()
+    val reminders: LiveData<List<Reminder>> get() = _reminders
 
-    // LiveData para controlar o estado "Sem Dados"
-    private val _isEmpty = MutableLiveData<Boolean>(true)
-    val isEmpty: LiveData<Boolean> = _isEmpty
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> get() = _error
 
     init {
-        loadReminders()
+        val database = ReminderDatabase.getDatabase(application)
+        remindersRepository = RemindersLocalRepository(database.reminderDao())
     }
 
     fun loadReminders() {
         viewModelScope.launch {
             try {
-                val reminders = repository.getReminders()
-                _remindersList.value = reminders
-                _isEmpty.value = reminders.isEmpty()
+                val reminderList = remindersRepository.getAllReminders()
+                _reminders.value = reminderList
+                _error.value = null
             } catch (e: Exception) {
-                _errorMessage.value = "Erro ao carregar lembretes: ${e.message}"
+                _error.value = "Erro ao carregar os lembretes"
             }
         }
     }
-
-
 }
+
+
 

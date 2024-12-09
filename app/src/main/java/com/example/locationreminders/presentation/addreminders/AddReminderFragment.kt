@@ -1,33 +1,53 @@
 package com.example.locationreminders.presentation.addreminders
 
-import com.example.locationreminders.presentation.viewModel.addreminders.AddReminderViewModel
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
-import com.example.locationreminders.databinding.AddReminderFragmentBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.viewModels
+import com.example.locationreminders.R
+import com.example.locationreminders.presentation.viewModel.addreminders.AddReminderViewModel
 
 class AddReminderFragment : Fragment() {
 
-    private val viewModel: AddReminderViewModel by viewModel()
-    private lateinit var binding: AddReminderFragmentBinding
+    private val viewModel: AddReminderViewModel by viewModels()
+
+    private lateinit var titleEditText: EditText
+    private lateinit var descriptionEditText: EditText
+    private lateinit var saveButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = AddReminderFragmentBinding.inflate(inflater, container, false)
+    ): View? {
+        return inflater.inflate(R.layout.add_reminder_fragment, container, false)
+    }
 
-        binding.viewModel = viewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        binding.saveButton.setOnClickListener {
-            viewModel.saveReminder()
-            activity?.onBackPressed()
+        titleEditText = view.findViewById(R.id.titleEditText)
+        descriptionEditText = view.findViewById(R.id.descriptionEditText)
+        saveButton = view.findViewById(R.id.saveButton)
+
+        setupObservers()
+        setupClickListeners()
+    }
+
+    private fun setupObservers() {
+        // Observa as alterações no ViewModel
+    }
+
+    private fun setupClickListeners() {
+        saveButton.setOnClickListener {
+            val title = titleEditText.text.toString()
+            val description = descriptionEditText.text.toString()
+
+
         }
-
-        return binding.root
     }
 }
+

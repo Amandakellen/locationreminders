@@ -2,11 +2,11 @@ package com.example.locationreminders.presentation.viewModel.addreminders
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.locationreminders.data.repository.RemindersRepository
+import com.example.locationreminders.data.repository.RemindersLocalRepository
 import com.example.locationreminders.domain.model.Reminder
 import kotlinx.coroutines.launch
 
-class AddReminderViewModel(private val repository: RemindersRepository) : ViewModel() {
+class AddReminderViewModel(private val repository: RemindersLocalRepository) : ViewModel() {
 
     var title: String = ""
     var description: String = ""
@@ -14,15 +14,6 @@ class AddReminderViewModel(private val repository: RemindersRepository) : ViewMo
     var longitude: Double = 0.0
 
     fun saveReminder() {
-        viewModelScope.launch {
-            val reminder = Reminder(
-                title = title,
-                description = description,
-                location = "Local Selecionado", // Pode ser dinâmico
-                latitude = latitude,
-                longitude = longitude
-            )
-            repository.saveReminder(reminder)
-        }
+
     }
 }

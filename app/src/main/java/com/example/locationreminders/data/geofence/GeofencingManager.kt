@@ -6,7 +6,7 @@ import android.content.Intent
 import android.util.Log
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
-import com.example.locationreminders.domain.geofence.GeofenceService
+import com.example.locationreminders.domain.geofence.GeofencingService
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
@@ -40,7 +40,7 @@ class GeofencingManager(private val context: Context) {
 
             // PendingIntent para o serviço que será chamado quando o geofence for ativado
             val geofencePendingIntent: PendingIntent = PendingIntent.getService(
-                context, 0, Intent(context, GeofenceService::class.java),
+                context, 0, Intent(context, GeofencingService::class.java),
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
 

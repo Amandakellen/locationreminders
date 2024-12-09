@@ -1,38 +1,30 @@
 package com.example.locationreminders.domain.geofence
 
 import android.annotation.SuppressLint
+import android.app.IntentService
 import android.app.PendingIntent
-import android.app.Service
 import android.content.Intent
-import android.os.IBinder
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.example.locationreminders.R
+import com.example.locationreminders.domain.model.Reminder
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 
-class GeofenceService : Service() {
+class GeofencingService : IntentService("GeofencingService") {
 
-    private lateinit var geofencingClient: GeofencingClient
+    private val geofencingClient: GeofencingClient by lazy { LocationServices.getGeofencingClient(applicationContext) }
 
-    override fun onCreate() {
-        super.onCreate()
-        geofencingClient = LocationServices.getGeofencingClient(this)
+    override fun onHandleIntent(intent: Intent?) {
+        // Obtém os dados do lembrete a partir do Intent
+        val reminderId = intent?.getLongExtra("reminderId", -1)
+        // Aqui você implementa a lógica para verificar se o geofencing foi acionado
     }
 
     @SuppressLint("MissingPermission")
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        // Exemplo de como configurar um Geofence para um lembrete
-        val title = intent?.getStringExtra("title") ?: "Lembrete de POI"
-        val latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
-        val longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
-        val radius = 100f // 100 metros de raio
-
+    private fun addGeofence(reminder: Reminder) {
         val geofence = Geofence.Builder()
-            .setRequestId("reminderGeofence")
-            .setCircularRegion(latitude, longitude, radius)
+            .setRequestId(reminder.id.toString())
+//            .setCircularRegion(reminder.latitude, reminder.longitude, 100f) // Raio de 100 metros
             .setExpirationDuration(Geofence.NEVER_EXPIRE)
             .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
             .build()
@@ -43,39 +35,18 @@ class GeofenceService : Service() {
             .build()
 
         val geofencePendingIntent = PendingIntent.getService(
-            this, 0, Intent(this, GeofenceReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT
+            this,
+            0,
+            Intent(this, GeofencingService::class.java),
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)?.run {
-            addOnSuccessListener {
+        geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)
+            .addOnSuccessListener {
                 // Geofence adicionado com sucesso
             }
-            addOnFailureListener {
-                // Erro ao adicionar geofence
+            .addOnFailureListener {
+                // Falha ao adicionar o geofence
             }
-        }
-
-        // Exibe a notificação
-        showNotification(title)
-
-        return START_NOT_STICKY
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun showNotification(title: String) {
-        val notification = NotificationCompat.Builder(this, "GeofenceChannel")
-            .setContentTitle("Você entrou em uma área de lembrete!")
-            .setContentText(title)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .build()
-
-        val notificationManager = NotificationManagerCompat.from(this)
-        notificationManager.notify(1, notification)
-    }
-
-    override fun onBind(intent: Intent?): IBinder? {
-        return null
     }
 }
-
