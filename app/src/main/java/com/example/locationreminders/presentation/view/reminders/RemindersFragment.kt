@@ -14,11 +14,13 @@ import com.example.locationreminders.presentation.viewModel.reminders.RemindersV
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RemindersFragment : Fragment() {
 
     private val viewModel: RemindersViewModel by viewModel()
+
     private lateinit var remindersAdapter: RemindersAdapter
 
     private lateinit var remindersRecyclerView: RecyclerView
@@ -54,10 +56,9 @@ class RemindersFragment : Fragment() {
     }
 
     private fun setupObservers() {
-//        viewModel.remindersList.observe(viewLifecycleOwner, Observer { reminders ->
-//            remindersAdapter.submitList(reminders)
-//        })
-//
+      if(viewModel.reminders.value?.isEmpty() == true){
+
+      }
 //        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { error ->
 //            error?.let {
 //                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()

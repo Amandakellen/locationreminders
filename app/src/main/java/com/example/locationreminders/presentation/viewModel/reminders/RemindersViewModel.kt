@@ -8,9 +8,9 @@ import com.example.locationreminders.data.repository.RemindersLocalRepository
 import com.example.locationreminders.domain.model.Reminder
 import kotlinx.coroutines.launch
 
-class RemindersViewModel(application: Application) : AndroidViewModel(application) {
-
+class RemindersViewModel(
     private val remindersRepository: RemindersLocalRepository
+) : ViewModel() {
 
     private val _reminders = MutableLiveData<List<Reminder>>()
     val reminders: LiveData<List<Reminder>> get() = _reminders
@@ -19,15 +19,14 @@ class RemindersViewModel(application: Application) : AndroidViewModel(applicatio
     val error: LiveData<String?> get() = _error
 
     init {
-        val database = ReminderDatabase.getDatabase(application)
-        remindersRepository = RemindersLocalRepository(database.reminderDao())
+        loadReminders()
     }
 
     fun loadReminders() {
         viewModelScope.launch {
             try {
                 val reminderList = remindersRepository.getAllReminders()
-                _reminders.value = reminderList
+                //_reminders.value = reminderList
                 _error.value = null
             } catch (e: Exception) {
                 _error.value = "Erro ao carregar os lembretes"
@@ -35,6 +34,7 @@ class RemindersViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 }
+
 
 
 
