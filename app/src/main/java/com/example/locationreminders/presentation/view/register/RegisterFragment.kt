@@ -11,13 +11,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.locationreminders.R
 import com.example.locationreminders.databinding.FragmentRegisterBinding
 import com.example.locationreminders.presentation.viewModel.login.LoginViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
