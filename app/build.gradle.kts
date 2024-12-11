@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     id("com.google.gms.google-services")
+    id("kotlin-parcelize")
+    id("kotlin-kapt")
 
 
 }
@@ -52,8 +54,6 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
-    implementation(libs.androidx.room.common)
-    implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -74,8 +74,12 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx.v253)
 
     //Koin
-    implementation(libs.koin.android)
-    implementation(libs.koin.android.compat)
+    implementation(libs.koin.android.v342)
+
+    //Room
+    implementation(libs.androidx.room.runtime )
+    implementation(libs.androidx.room.ktx.v250)
+
 
 }
 

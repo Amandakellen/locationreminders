@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.locationreminders.R
-import com.example.locationreminders.domain.model.Reminder
+import com.example.locationreminders.data.Reminder
+
 
 class RemindersAdapter :
     ListAdapter<Reminder, RemindersAdapter.ReminderViewHolder>(ReminderDiffCallback()) {
