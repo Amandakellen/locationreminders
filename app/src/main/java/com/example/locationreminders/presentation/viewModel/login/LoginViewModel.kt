@@ -6,8 +6,8 @@ import com.example.locationreminders.data.repository.FirebaseAuthRepository
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 
-class LoginViewModel : ViewModel() {
-    private val repository = FirebaseAuthRepository()
+class LoginViewModel(private val repository: FirebaseAuthRepository): ViewModel() {
+
     val user: LiveData<FirebaseUser?> = repository.user
 
     fun login(email: String, password: String, onResult: (Boolean) -> Unit) {
